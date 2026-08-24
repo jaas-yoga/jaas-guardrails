@@ -1,0 +1,25 @@
+id: extended-pii-scan
+name: Extended PII Scan
+description: >
+  Advisory, label-anchored scan for passport numbers, driver's license
+  numbers, and medical record numbers — entity types beyond
+  pii-pattern-scan's basic set. Each pattern requires the labeling word
+  itself to be present nearby to keep false positives low; this is a
+  heuristic aid for compliance review, not a determination.
+category: PRIVACY
+level: 4
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "Microsoft Presidio extended entity types (advisory use)"
+kind: regex_file_scan
+config:
+  scope: all_files
+  exclude_manifest_field: "owner.contact"
+  patterns:
+    - name: passport_number
+      regex: '(?i)\bpassport\s*(?:no\.?|number|#)?\s*[:#]?\s*[A-Z0-9]{6,9}\b'
+    - name: drivers_license_number
+      regex: "(?i)\\bdriver.?s?\\s*licen[sc]e\\s*(?:no\\.?|number|#)?\\s*[:#]?\\s*[A-Z0-9]{5,10}\\b"
+    - name: medical_record_number
+      regex: '(?i)\b(?:mrn|medical record number)\s*[:#]?\s*\d{6,10}\b'

@@ -1,0 +1,22 @@
+id: license-file-missing
+name: License File Missing
+description: >
+  Warns when no LICENSE-like file is packaged and no license is mentioned
+  in README.md. The inverse of copyleft-license-detected: this flags
+  total absence of any license declaration, useful for tenants under
+  license-compliance requirements (FOSSA/SPDX practice).
+category: LICENSING
+level: 4
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "FOSSA/SPDX practice: every distributed package should declare a license"
+kind: file_text_presence
+config:
+  filename_patterns:
+    - '^LICENSE(\..*)?$'
+    - '^COPYING(\..*)?$'
+    - '^LICENSE-[A-Za-z0-9.]+$'
+  fallback_text_file: "README.md"
+  fallback_text_pattern: '(?i)\blicen[sc]e\b\s*[:=-]'
+  message_if_missing: "No LICENSE file found and no license mention detected in README.md"

@@ -1,0 +1,22 @@
+id: unsafe-yaml-load
+name: Unsafe YAML Load
+description: >
+  Flags use of PyYAML's default `yaml.load(...)` without an explicit safe
+  `Loader=` argument on the same line, which can deserialize arbitrary
+  Python objects from untrusted input.
+category: CODE_SAFETY
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "CWE-502 Deserialization of Untrusted Data; PyYAML unsafe-Loader advisory"
+kind: regex_file_scan
+config:
+  scope: entrypoint_only
+  gate:
+    match: exact
+    runtime_families:
+      - python
+  patterns:
+    - name: yaml_load_without_safe_loader
+      regex: '(?m)^(?!.*Loader\s*=).*\byaml\.load\s*\(.*$'

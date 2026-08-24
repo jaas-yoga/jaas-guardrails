@@ -1,0 +1,23 @@
+id: binary-artifact-present
+name: Binary Artifact Present
+description: >
+  Warns when the package contains a compiled/binary file extension that
+  cannot be reviewed as source. `.jar` is exempted for skills whose
+  runtime family is `java`.
+category: SUPPLY_CHAIN
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "OSSF Scorecard: Binary-Artifacts check"
+kind: file_extension_scan
+config:
+  rules:
+    - extension: ".exe"
+    - extension: ".dll"
+    - extension: ".so"
+    - extension: ".dylib"
+    - extension: ".bin"
+    - extension: ".msi"
+    - extension: ".jar"
+      allowed_runtime_families: ["java"]

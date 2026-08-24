@@ -1,0 +1,36 @@
+id: prompt-injection-heuristics
+name: Prompt Injection Heuristics
+description: >
+  Scans the entrypoint file for phrasing commonly used to override an AI
+  agent's instructions, exfiltrate secrets, or leak its system prompt, when
+  the skill's runtime is a prompt/instruction-following family.
+category: PROMPT_SAFETY
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "OWASP Top 10 for LLM Applications 2025: LLM01 Prompt Injection, LLM07 System Prompt Leakage"
+kind: regex_file_scan
+config:
+  scope: entrypoint_only
+  gate:
+    match: contains
+    runtime_families:
+      - prompt
+      - llm
+      - instruction
+      - markdown
+      - text
+      - chat
+  patterns:
+    - name: ignore_instructions
+      regex: '(?i)ignore (?:all |any )?(?:previous|prior|above) instructions'
+    - name: disregard_instructions
+      regex: '(?i)disregard (?:all |any )?(?:previous|prior|above) instructions'
+    - name: reveal_system_prompt
+      regex: '(?i)(?:reveal|print|show|output) (?:the |your )?(?:system prompt|instructions)'
+    - name: exfiltrate_secrets
+      regex: '(?i)(?:exfiltrate|send|leak) (?:the |your )?(?:api key|secret|password|env(?:ironment)? variables?)'
+    - name: invisible_unicode
+      # zero-width space, ZWNJ, ZWJ, word joiner, BOM/zero-width-no-break-space
+      regex: '[\u200b\u200c\u200d\u2060\ufeff]'

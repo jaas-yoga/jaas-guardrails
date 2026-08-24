@@ -1,0 +1,14 @@
+id: large-dependency-graph
+name: Large Dependency Graph
+description: >
+  Warns when a package declares an unusually large number of direct
+  dependencies, as a proxy for supply-chain surface area.
+category: SUPPLY_CHAIN
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "supply-chain surface-area hygiene, in the spirit of OSSF Scorecard's dependency-related checks"
+kind: dependency_count
+config:
+  max_dependencies: 15

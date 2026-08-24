@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Guardrail Catalog Entry",
+  "description": "One publish-time guardrail rule, consumed by this repository's own engine (src/rune_guardrails/engine.py).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "description",
+    "category",
+    "level",
+    "mandatory",
+    "default_enabled",
+    "severity",
+    "standard_ref",
+    "kind",
+    "config"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Stable identifier. Never reused for a different meaning once shipped."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": [
+        "SECRET",
+        "SIZE",
+        "CODE_SAFETY",
+        "PROMPT_SAFETY",
+        "PERMISSIONS",
+        "LICENSING",
+        "SUPPLY_CHAIN",
+        "PRIVACY",
+        "COMPLIANCE",
+        "CONTENT_SAFETY"
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "enum": [1, 2, 3, 4],
+      "description": "1=Baseline (mandatory), 2=Standard (default on), 3=Advanced (opt-in), 4=Regulatory (opt-in)."
+    },
+    "mandatory": {
+      "type": "boolean",
+      "description": "Must be true only for level 1 entries. Mandatory checks are force-enabled by the engine regardless of tenant policy."
+    },
+    "default_enabled": {
+      "type": "boolean",
+      "description": "Whether a tenant with no explicit policy runs this check (ignored for mandatory entries, which are always on)."
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["BLOCK", "WARN"]
+    },
+    "standard_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short citation of the industry standard/tool this rule is derived from."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "regex_file_scan",
+        "filename_pattern_scan",
+        "package_size",
+        "permission_pair_risk",
+        "permission_count_threshold",
+        "dependency_constraint",
+        "dependency_count",
+        "dependency_typosquat",
+        "file_extension_scan",
+        "wordlist_scan",
+        "file_text_presence"
+      ],
+      "description": "Names the executor in src/rune_guardrails/executors.py that knows how to run this rule's config."
+    },
+    "config": {
+      "type": "object",
+      "description": "Executor-specific configuration. Shape depends on `kind`; see README.md for the schema of each kind."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+id: unpinned-dependency-range
+name: Unpinned Dependency Range
+description: >
+  Warns when a declared dependency's version constraint is a wildcard or
+  has no upper bound, which lets a future, unreviewed dependency version
+  be resolved automatically at install/resolve time.
+category: SUPPLY_CHAIN
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "OSSF Scorecard: Pinned-Dependencies check"
+kind: dependency_constraint
+config:
+  reject_unbounded: true
+  upper_bound_operators: ["<", "<=", "=="]

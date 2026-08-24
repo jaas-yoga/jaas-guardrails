@@ -1,0 +1,28 @@
+id: pii-pattern-scan
+name: PII Pattern Scan
+description: >
+  Scans all packaged files for common personally-identifiable-information
+  patterns (email, US SSN, phone number, credit card, IBAN). The
+  manifest's own `owner.contact` field is legitimately an email address
+  and is excluded from the scan of manifest.yaml specifically.
+category: PRIVACY
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "Microsoft Presidio PII entity taxonomy (financial/identity/personal categories)"
+kind: regex_file_scan
+config:
+  scope: all_files
+  exclude_manifest_field: "owner.contact"
+  patterns:
+    - name: email
+      regex: '\b[\w.+-]+@[\w-]+\.[A-Za-z]{2,}\b'
+    - name: us_ssn
+      regex: '\b\d{3}-\d{2}-\d{4}\b'
+    - name: phone_number
+      regex: '\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\b'
+    - name: credit_card
+      regex: '\b(?:4\d{3}|5[1-5]\d{2}|3[47]\d{2}|6011)[- ]?\d{4}[- ]?\d{4}[- ]?\d{1,4}\b'
+    - name: iban
+      regex: '\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b'

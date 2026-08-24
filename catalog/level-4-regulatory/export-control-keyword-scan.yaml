@@ -1,0 +1,23 @@
+id: export-control-keyword-scan
+name: Export Control Keyword Scan
+description: >
+  Advisory-only flag for terms associated with export-controlled software
+  (ITAR, EAR99, "export controlled"). This is a low-confidence keyword
+  heuristic for routing to legal/compliance review, not a legal
+  determination of export-control status.
+category: COMPLIANCE
+level: 4
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "advisory heuristic only; not a substitute for legal export-control review"
+kind: regex_file_scan
+config:
+  scope: all_files
+  patterns:
+    - name: itar
+      regex: '(?i)\bITAR\b'
+    - name: ear99
+      regex: '(?i)\bEAR99\b'
+    - name: export_controlled_phrase
+      regex: '(?i)\bexport[- ]controlled\b'

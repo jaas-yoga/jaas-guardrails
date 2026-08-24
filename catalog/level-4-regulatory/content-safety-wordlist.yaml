@@ -1,0 +1,25 @@
+id: content-safety-wordlist
+name: Content Safety Wordlist
+description: >
+  Whole-word match against a wordlist for the manifest's public-facing
+  text (name/description) and README.md. The shipped list is
+  intentionally a minimal, mild placeholder — operators running this
+  check for real should replace `config.words` with a list curated by
+  their own trust & safety process; this rule is best-effort content
+  hygiene, not a moderation system.
+category: CONTENT_SAFETY
+level: 4
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "best-effort content hygiene; not a moderation replacement"
+kind: wordlist_scan
+config:
+  scope:
+    - "manifest.yaml"
+    - "README.md"
+  whole_word: true
+  case_sensitive: false
+  words:
+    - "damn"
+    - "hell"

@@ -1,0 +1,17 @@
+id: dependency-typosquat-heuristic
+name: Dependency Typosquat Heuristic
+description: >
+  Warns when a declared dependency's id is within a single character edit
+  of an id that already exists in the registry index but isn't the one
+  declared — a cheap, local proxy for the typosquatting technique behind
+  the most common real-world npm/PyPI supply-chain attacks. No network
+  call: compares only against ids already known to this registry.
+category: SUPPLY_CHAIN
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "typosquatting as the dominant npm/PyPI supply-chain attack vector (Socket.dev, ossf/malicious-packages research)"
+kind: dependency_typosquat
+config:
+  max_edit_distance: 1

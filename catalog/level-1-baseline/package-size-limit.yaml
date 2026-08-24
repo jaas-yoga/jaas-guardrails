@@ -1,0 +1,17 @@
+id: package-size-limit
+name: Package Size Limit
+description: >
+  Rejects packages containing an oversized individual file, or whose total
+  archived size is unreasonably large for a skill package. Guards against
+  accidental inclusion of build artifacts, datasets, or media, and against
+  the archive itself being used as a DoS vector.
+category: SIZE
+level: 1
+mandatory: true
+default_enabled: true
+severity: BLOCK
+standard_ref: "general artifact-hygiene practice; DoS-via-oversized-artifact"
+kind: package_size
+config:
+  per_file_limit_bytes: 5242880
+  total_limit_bytes: 20971520

@@ -1,0 +1,27 @@
+id: sensitive-filename-scan
+name: Sensitive Filename Scan
+description: >
+  Flags files whose *name* is almost always a packaging mistake regardless
+  of content: dotenv files, private key files, and common credential
+  filenames. Complements secret-scan, which looks at content.
+category: SECRET
+level: 1
+mandatory: true
+default_enabled: true
+severity: BLOCK
+standard_ref: "gitleaks/trufflehog: sensitive-filename pre-scan heuristic"
+kind: filename_pattern_scan
+config:
+  match: basename
+  patterns:
+    - '^\.env$'
+    - '^\.env\..+$'
+    - '^id_rsa$'
+    - '^id_dsa$'
+    - '^id_ecdsa$'
+    - '^id_ed25519$'
+    - '.*_rsa$'
+    - '.*\.pem$'
+    - '.*\.pfx$'
+    - '.*\.p12$'
+    - '^credentials\.json$'

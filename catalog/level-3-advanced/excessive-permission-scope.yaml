@@ -1,0 +1,15 @@
+id: excessive-permission-scope
+name: Excessive Permission Scope
+description: >
+  Warns when a package requests more distinct permission scopes than a
+  typical skill needs, independent of which specific scopes they are. A
+  high scope count is itself a signal of an overly agentic skill.
+category: PERMISSIONS
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "OWASP Top 10 for LLM Applications 2025: LLM06 Excessive Agency"
+kind: permission_count_threshold
+config:
+  max_scopes: 5

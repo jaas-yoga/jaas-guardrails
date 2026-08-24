@@ -1,0 +1,56 @@
+id: dangerous-code-patterns
+name: Dangerous Code Patterns
+description: >
+  Scans the entrypoint file for code patterns that are frequently abused
+  for arbitrary code execution or command injection, when the skill's
+  runtime is a code-executing family. Only runs if the entrypoint file is
+  actually present in the archived package.
+category: CODE_SAFETY
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "CWE-95 Eval Injection; CWE-78 OS Command Injection; CWE-502 Deserialization of Untrusted Data"
+kind: regex_file_scan
+config:
+  scope: entrypoint_only
+  gate:
+    match: exact
+    runtime_families:
+      - python
+      - node
+      - nodejs
+      - javascript
+      - typescript
+      - bash
+      - shell
+      - sh
+      - ruby
+      - go
+      - golang
+      - java
+      - rust
+      - php
+      - perl
+      - powershell
+      - dotnet
+      - csharp
+  patterns:
+    - name: eval_call
+      regex: '\beval\s*\('
+    - name: exec_call
+      regex: '\bexec\s*\('
+    - name: os_system_call
+      regex: '\bos\.system\s*\('
+    - name: subprocess_shell_true
+      regex: 'subprocess\.\w+\([^)]*shell\s*=\s*True'
+    - name: pickle_loads
+      regex: '\bpickle\.loads?\s*\('
+    - name: dunder_import
+      regex: '\b__import__\s*\('
+    - name: curl_pipe_shell
+      regex: '\bcurl\b[^\n]{0,80}\|\s*(?:sh|bash)\b'
+    - name: wget_pipe_shell
+      regex: '\bwget\b[^\n]{0,80}\|\s*(?:sh|bash)\b'
+    - name: node_child_process_exec
+      regex: '\bchild_process\.exec(?:Sync)?\s*\('

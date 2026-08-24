@@ -1,0 +1,18 @@
+id: insecure-embedded-url
+name: Insecure Embedded URL
+description: >
+  Warns on hardcoded plaintext-HTTP URLs embedded in any packaged file.
+  Common, harmless documentation hosts (localhost, 127.0.0.1, 0.0.0.0,
+  example.com/org) are excluded to keep the false-positive rate low.
+category: SUPPLY_CHAIN
+level: 3
+mandatory: false
+default_enabled: false
+severity: WARN
+standard_ref: "CWE-319 Cleartext Transmission of Sensitive Information (adjacent); SSRF hardening hygiene"
+kind: regex_file_scan
+config:
+  scope: all_files
+  patterns:
+    - name: plaintext_http_url
+      regex: '\bhttp://(?!(?:localhost|127\.0\.0\.1|0\.0\.0\.0|example\.(?:com|org))\b)[^\s"''<>]+'

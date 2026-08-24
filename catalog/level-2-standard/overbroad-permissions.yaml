@@ -1,0 +1,20 @@
+id: overbroad-permissions
+name: Overbroad Permissions
+description: >
+  Flags specific two-scope combinations in permissions.yaml that are
+  individually common but jointly risky (e.g. write access to the
+  filesystem combined with outbound network access). `permissions.yaml`
+  scopes are free-form `resource:action` strings with no enforced
+  taxonomy, so this is a heuristic on the convention already used by every
+  existing example, not a validated enum.
+category: PERMISSIONS
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "OWASP Top 10 for LLM Applications 2025: LLM06 Excessive Agency; principle of least privilege"
+kind: permission_pair_risk
+config:
+  risky_pairs:
+    - ["fs:write", "network:egress"]
+    - ["secrets:read", "network:egress"]

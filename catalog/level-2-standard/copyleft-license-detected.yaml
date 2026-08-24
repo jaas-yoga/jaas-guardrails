@@ -1,0 +1,21 @@
+id: copyleft-license-detected
+name: Copyleft License Detected
+description: >
+  Warns when a strong or weak copyleft license (GPL, AGPL, LGPL family) is
+  referenced anywhere in the package, so the publisher can confirm its
+  distribution obligations are compatible with how the registry
+  redistributes published skills.
+category: LICENSING
+level: 2
+mandatory: false
+default_enabled: true
+severity: WARN
+standard_ref: "FOSSA license categories; SPDX copyleft identifiers (GPL-3.0, AGPL-3.0, LGPL-3.0)"
+kind: regex_file_scan
+config:
+  scope: all_files
+  patterns:
+    - name: gnu_license_name
+      regex: '\bGNU (?:General Public License|Affero General Public License|Lesser General Public License)\b'
+    - name: spdx_copyleft_identifier
+      regex: '\b(?:A|L)?GPL-[123](?:\.[01])?\b'
