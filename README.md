@@ -172,7 +172,7 @@ kind: regex_file_scan
 config: { ... }        # shape depends on `kind`, see below
 ```
 
-`kind` names an **executor** implemented once in `src/rune_guardrails/
+`kind` names an **executor** implemented once in `src/jaas_guardrails/
 executors.py`; adding a new rule of an existing kind never requires a code
 change, only a new YAML file here.
 
@@ -220,7 +220,7 @@ place for that, not this service).
 ```
 catalog/                  the 19 rules (data)
 schema/                   JSON Schema for a rule file
-src/rune_guardrails/
+src/jaas_guardrails/
   models.py                core dataclasses
   executors.py              one function per `kind`
   catalog_loader.py         parses catalog/ into GuardrailDefinitions
@@ -229,7 +229,7 @@ src/rune_guardrails/
     schemas.py               HTTP request/response Pydantic models
     routes.py                 GET /catalog, POST /scan, GET /healthz
     app.py                     FastAPI app factory
-  __main__.py                uvicorn entry point (`rune-guardrails` console script)
+  __main__.py                uvicorn entry point (`jaas-guardrails` console script)
 tests/
   unit/                      executor + loader tests (offline, in-process)
   integration/               real HTTP-shaped tests via FastAPI's TestClient

@@ -1,6 +1,6 @@
 """Ad-hoc, tenant-authored rules attached to a single /scan request.
 
-Never persisted here — the caller (e.g. rune_skills) owns storage of
+Never persisted here — the caller (e.g. jaas_skills) owns storage of
 which custom rules exist and which skill(s) they apply to; this service
 only validates and executes whatever it's handed on each request, exactly
 like it already does for the maintainer-curated catalog, just without the
@@ -10,8 +10,8 @@ that changes about how a rule's regex gets executed).
 
 from __future__ import annotations
 
-from rune_guardrails.executors import EXECUTORS_BY_KIND
-from rune_guardrails.models import (
+from jaas_guardrails.executors import EXECUTORS_BY_KIND
+from jaas_guardrails.models import (
     GuardrailCategory,
     GuardrailDefinition,
     GuardrailLevel,

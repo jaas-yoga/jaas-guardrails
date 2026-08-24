@@ -1,8 +1,8 @@
 import pytest
 
-from rune_guardrails.catalog_loader import DEFAULT_CATALOG_DIR, load_catalog
-from rune_guardrails.executors import EXECUTORS_BY_KIND
-from rune_guardrails.models import GuardrailLevel
+from jaas_guardrails.catalog_loader import DEFAULT_CATALOG_DIR, load_catalog
+from jaas_guardrails.executors import EXECUTORS_BY_KIND
+from jaas_guardrails.models import GuardrailLevel
 
 CATALOG = load_catalog(DEFAULT_CATALOG_DIR)
 

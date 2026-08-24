@@ -1,7 +1,7 @@
 import pytest
 
-from rune_guardrails.custom_rules import InvalidCustomRuleError, build_custom_rule, dry_run_compile
-from rune_guardrails.regex_engine import UnsafeCustomPatternError
+from jaas_guardrails.custom_rules import InvalidCustomRuleError, build_custom_rule, dry_run_compile
+from jaas_guardrails.regex_engine import UnsafeCustomPatternError
 
 
 def _rule(**overrides):

@@ -2,13 +2,13 @@
 # Runs the guardrails service standalone, independent of any caller.
 #
 #   ./run.sh              starts the service on 127.0.0.1:8028
-#   RUNE_GUARDRAILS_PORT=9000 ./run.sh
+#   JAAS_GUARDRAILS_PORT=9000 ./run.sh
 #
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-export RUNE_GUARDRAILS_HOST="${RUNE_GUARDRAILS_HOST:-127.0.0.1}"
-export RUNE_GUARDRAILS_PORT="${RUNE_GUARDRAILS_PORT:-8028}"
+export JAAS_GUARDRAILS_HOST="${JAAS_GUARDRAILS_HOST:-127.0.0.1}"
+export JAAS_GUARDRAILS_PORT="${JAAS_GUARDRAILS_PORT:-8028}"
 
 if ! command -v uv >/dev/null 2>&1; then
     echo "error: uv is required (https://docs.astral.sh/uv/)." >&2
@@ -16,5 +16,5 @@ if ! command -v uv >/dev/null 2>&1; then
 fi
 
 uv sync --quiet
-echo "[rune-guardrails] starting on http://${RUNE_GUARDRAILS_HOST}:${RUNE_GUARDRAILS_PORT} ..."
-exec uv run rune-guardrails
+echo "[jaas-guardrails] starting on http://${JAAS_GUARDRAILS_HOST}:${JAAS_GUARDRAILS_PORT} ..."
+exec uv run jaas-guardrails

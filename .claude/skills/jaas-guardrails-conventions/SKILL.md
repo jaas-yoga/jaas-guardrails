@@ -1,9 +1,9 @@
 ---
-name: rune-guardrails-conventions
-description: Conventions for the rune-guardrails standalone scanning service (src/rune_guardrails) — the 4-level rule model, executor-kind pattern, offline-only constraint, and how to add a new rule. Use when reading, writing, or reviewing any code under src/rune_guardrails, catalog/, schema/, or tests/ in this repo.
+name: jaas-guardrails-conventions
+description: Conventions for the jaas-guardrails standalone scanning service (src/jaas_guardrails) — the 4-level rule model, executor-kind pattern, offline-only constraint, and how to add a new rule. Use when reading, writing, or reviewing any code under src/jaas_guardrails, catalog/, schema/, or tests/ in this repo.
 ---
 
-# rune-guardrails conventions
+# jaas-guardrails conventions
 
 Standalone publish-time content-safety scanning service. Own process, own
 REST API (`GET /catalog`, `POST /scan`, `GET /healthz`), own test suite. No
@@ -73,7 +73,7 @@ HTTP-shaped assertions into the unit tests or vice versa.
 
 This is a genuinely independent service — its own repo, own CI
 (`.github/workflows/`), own Docker image, own release cadence. A caller
-(e.g. `rune_skills`) never imports this repo's Python and never caches its
+(e.g. `jaas_skills`) never imports this repo's Python and never caches its
 catalog beyond a single request. Don't add anything here that assumes a
 specific caller's schema — `ManifestInput`/`DependencyInput` in
 `models.py` are deliberately flattened, caller-agnostic shapes, not a

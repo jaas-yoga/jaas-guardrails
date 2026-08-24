@@ -1,7 +1,7 @@
-from rune_guardrails.catalog_loader import DEFAULT_CATALOG_DIR, load_catalog
-from rune_guardrails.engine import run_guardrails
-from rune_guardrails.executors import EXECUTORS_BY_KIND
-from rune_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput
+from jaas_guardrails.catalog_loader import DEFAULT_CATALOG_DIR, load_catalog
+from jaas_guardrails.engine import run_guardrails
+from jaas_guardrails.executors import EXECUTORS_BY_KIND
+from jaas_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput
 
 CATALOG = load_catalog(DEFAULT_CATALOG_DIR)
 CATALOG_BY_ID: dict[str, GuardrailDefinition] = {d.id: d for d in CATALOG}

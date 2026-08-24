@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from rune_guardrails.executors import EXECUTORS_BY_KIND
-from rune_guardrails.models import (
+from jaas_guardrails.executors import EXECUTORS_BY_KIND
+from jaas_guardrails.models import (
     DependencyInput,
     GuardrailDefinition,
     GuardrailFinding,

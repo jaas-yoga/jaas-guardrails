@@ -21,7 +21,7 @@ callers — this is purely additive.
 ## 2.0.0 — Became a standalone service
 
 Breaking change: this repository is no longer data-only. It now owns the
-scanning engine too (`src/rune_guardrails/`) and exposes it over its own
+scanning engine too (`src/jaas_guardrails/`) and exposes it over its own
 REST API (`GET /catalog`, `POST /scan`, `GET /healthz`), runs as its own
 process on its own port, and has its own test suite and CI. Callers no
 longer vendor this repo as a submodule and execute its rules in-process —

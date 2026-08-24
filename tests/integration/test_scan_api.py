@@ -2,7 +2,7 @@ import base64
 
 from fastapi.testclient import TestClient
 
-from rune_guardrails.api.app import create_app
+from jaas_guardrails.api.app import create_app
 
 
 def _client():

@@ -8,15 +8,15 @@ from pathlib import Path
 
 import yaml
 
-from rune_guardrails.executors import EXECUTORS_BY_KIND
-from rune_guardrails.models import (
+from jaas_guardrails.executors import EXECUTORS_BY_KIND
+from jaas_guardrails.models import (
     GuardrailCategory,
     GuardrailDefinition,
     GuardrailLevel,
     GuardrailSeverity,
 )
 
-# repo_root/src/rune_guardrails/catalog_loader.py -> parents[2] = repo_root
+# repo_root/src/jaas_guardrails/catalog_loader.py -> parents[2] = repo_root
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CATALOG_DIR = REPO_ROOT / "catalog"
 

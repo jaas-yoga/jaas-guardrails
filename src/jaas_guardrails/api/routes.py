@@ -5,7 +5,7 @@ import base64
 import re2
 from fastapi import APIRouter, HTTPException, Request
 
-from rune_guardrails.api.schemas import (
+from jaas_guardrails.api.schemas import (
     FindingResponse,
     GuardrailDefinitionResponse,
     HealthResponse,
@@ -14,10 +14,10 @@ from rune_guardrails.api.schemas import (
     ValidateRuleRequest,
     ValidateRuleResponse,
 )
-from rune_guardrails.custom_rules import InvalidCustomRuleError, build_custom_rule, dry_run_compile
-from rune_guardrails.engine import run_guardrails
-from rune_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput
-from rune_guardrails.regex_engine import UnsafeCustomPatternError
+from jaas_guardrails.custom_rules import InvalidCustomRuleError, build_custom_rule, dry_run_compile
+from jaas_guardrails.engine import run_guardrails
+from jaas_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput
+from jaas_guardrails.regex_engine import UnsafeCustomPatternError
 
 router = APIRouter()
 

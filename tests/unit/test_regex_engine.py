@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from rune_guardrails.regex_engine import UnsafeCustomPatternError, compile_all
+from jaas_guardrails.regex_engine import UnsafeCustomPatternError, compile_all
 
 
 def test_trusted_pattern_uses_python_re_and_supports_lookahead():

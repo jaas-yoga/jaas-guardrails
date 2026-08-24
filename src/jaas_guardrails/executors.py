@@ -14,8 +14,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from rune_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput, RawFinding
-from rune_guardrails.regex_engine import compile_all
+from jaas_guardrails.models import DependencyInput, GuardrailDefinition, ManifestInput, RawFinding
+from jaas_guardrails.regex_engine import compile_all
 
 
 def _entrypoint_targets(

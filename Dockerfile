@@ -16,8 +16,8 @@ COPY README.md ./
 # versions tested in CI.
 RUN uv sync --frozen
 
-ENV RUNE_GUARDRAILS_HOST=0.0.0.0
-ENV RUNE_GUARDRAILS_PORT=8028
+ENV JAAS_GUARDRAILS_HOST=0.0.0.0
+ENV JAAS_GUARDRAILS_PORT=8028
 EXPOSE 8028
 
-CMD ["uv", "run", "rune-guardrails"]
+CMD ["uv", "run", "jaas-guardrails"]
