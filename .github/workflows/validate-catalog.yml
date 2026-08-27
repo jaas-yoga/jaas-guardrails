@@ -1,0 +1,61 @@
+name: Validate catalog
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml jsonschema
+      - run: |
+          python - <<'PYEOF'
+          import glob
+          import json
+          import sys
+
+          import yaml
+          from jsonschema import Draft7Validator
+
+          with open("schema/catalog-entry.schema.json") as f:
+              schema = json.load(f)
+          validator = Draft7Validator(schema)
+
+          files = sorted(glob.glob("catalog/level-*/*.yaml"))
+          if not files:
+              print("No catalog files found.")
+              sys.exit(1)
+
+          seen_ids = {}
+          failed = False
+          for path in files:
+              with open(path) as f:
+                  entry = yaml.safe_load(f)
+              errors = sorted(validator.iter_errors(entry), key=lambda e: e.path)
+              for error in errors:
+                  failed = True
+                  print(f"{path}: {error.message}")
+              expected_dir = f"level-{entry.get('level')}-" if isinstance(entry, dict) else ""
+              if isinstance(entry, dict):
+                  level_dir = path.split("/")[1]
+                  if not level_dir.startswith(f"level-{entry.get('level')}-"):
+                      failed = True
+                      print(f"{path}: level {entry.get('level')} does not match directory {level_dir}")
+                  if entry.get("mandatory") and entry.get("level") != 1:
+                      failed = True
+                      print(f"{path}: mandatory=true is only allowed at level 1")
+                  entry_id = entry.get("id")
+                  if entry_id in seen_ids:
+                      failed = True
+                      print(f"{path}: duplicate id '{entry_id}' also used by {seen_ids[entry_id]}")
+                  seen_ids[entry_id] = path
+
+          if failed:
+              sys.exit(1)
+          print(f"OK: {len(files)} catalog entries validated, {len(seen_ids)} unique ids.")
+          PYEOF
